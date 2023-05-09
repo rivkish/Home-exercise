@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 
-const koronaDetailsSchema = mongoose.Schema({
+const coronaDetailsSchema = mongoose.Schema({
         userCode:{
          type:mongoose.Schema.Types.ObjectId,
          ref:'users'
@@ -12,6 +12,6 @@ const koronaDetailsSchema = mongoose.Schema({
      recoveryDate:Date
 });
 
-const KoronaDetails = new mongoose.model("koronaDetails", koronaDetailsSchema);
-module.exports = KoronaDetails;
+const coronaDetails = new mongoose.model("coronaDetails", coronaDetailsSchema);
+module.exports = coronaDetails;
 

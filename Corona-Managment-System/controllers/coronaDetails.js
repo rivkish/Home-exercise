@@ -1,9 +1,9 @@
 const mongoose=require("mongoose");
-const KoronaDetails=require("../models/koronaDetails.model");
+const coronaDetails=require("../models/coronaDetails.model");
 
 const getAllDetails=async (req,res)=>{
     try{
-         let Details=await KoronaDetails.find({});
+         let Details=await coronaDetails.find({});
          res.send(Details)
     }
     catch(e){
@@ -12,7 +12,7 @@ const getAllDetails=async (req,res)=>{
 
 const addDetails=async(req,res)=>{
     try{   
-let d=new KoronaDetails({...req.body})
+let d=new coronaDetails({...req.body})
 let us=await d.save();
 return res.send(us);
     }
@@ -28,7 +28,7 @@ const deleteDetails=async(req,res)=>{
         let{id}=req.params;
         if(!mongoose.Types.ObjectId.isValid(id))
         return res.status(400).send("קוד לא תקין")
-        let d =await KoronaDetails.findByIdAndDelete(id);
+        let d =await coronaDetails.findByIdAndDelete(id);
         return res.send(d);
     }
     catch (e) {
@@ -43,7 +43,7 @@ const addVaccination=async(req,res)=>{
         let detail=req.body;
         if(!mongoose.Types.ObjectId.isValid(id))
           return res.status(400).send("קוד משתמש לא תקין")
-        let d=await KoronaDetails.findOne({userCode:id})    
+        let d=await coronaDetails.findOne({userCode:id})    
         if(!d)
           return res.status(404).send("לא נמצאו פרטים למשתמש זה");
         if(d.vaccinationsDate.length==4)
@@ -72,7 +72,7 @@ const addResult=async(req,res)=>{
          let date2= `${year}-${month}-${day2}`
         if(!mongoose.Types.ObjectId.isValid(id))
           return res.status(400).send("קוד משתמש לא תקין")
-        let d=await KoronaDetails.findOne({userCode:id})    
+        let d=await coronaDetails.findOne({userCode:id})    
         if(!d)
           return res.status(404).send("לא נמצאו פרטים למשתמש זה");
         d.positiveResultDate=date1

@@ -5,7 +5,7 @@ const cors = require("cors");
 
 
 const userRoute = require("./routes/user");
-const koronaDetailRoute = require("./routes/koronaDetails");
+const coronaDetailRoute = require("./routes/coronaDetails");
 
 
 
@@ -15,7 +15,7 @@ app.use(cors())
 
 app.use('/public', express.static('public'));
 app.use("/user",userRoute);
-app.use("/details",koronaDetailRoute);
+app.use("/details",coronaDetailRoute);
 app.use(morgan('common'))
 app.use(express.static("upload"))
 
