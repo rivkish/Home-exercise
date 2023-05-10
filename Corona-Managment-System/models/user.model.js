@@ -2,10 +2,10 @@ const mongoose=require("mongoose");
 
 
 const userSchema=mongoose.Schema({
-    // img:
-    // {
-    //     type: String
-    // },
+    img:
+    {
+        type: String
+    },
     firstName:String,
     lastName:String,
     identity:String,  

@@ -41,17 +41,34 @@ const getUserByID=async(req,res)=>{
     }
 }
 
-const addUser=async(req,res)=>{
-    try{    
-let user=new User({...req.body})
-let us=await user.save();
-return res.send(us);
-    }
-    catch(e) {
-        res.status(400).send(e.message)
-    }
-}
 
+const addUser=async(req,res)=>{
+    const url = req.protocol + '://' + req.get('host')
+    const user = new User({
+        _id: new mongoose.Types.ObjectId(),
+        img:url + '/public/' + req.file.filename,
+        firstName:req.body.firstName,
+        lastName:req.body.lastName,
+        identity:req.body.identity,      
+     address:{city:req.body.city,street:req.body.street,numberStreet:req.body.numberStreet},
+        birthDate:req.body.birthDate,
+        phone:req.body.phone,
+        cellPhone:req.body.cellPhone
+    });
+    user.save().then(result => {
+        res.status(201).json({
+            message: "user add successfully!",
+            userCreated: {
+                _id: result._id,
+                img: result.img
+            }
+        })
+    }).catch(err => {
+        console.log(err),
+            res.status(500).json({
+                error: err
+            });
+    })}
 
 const deleteUser=async(req,res)=>{
     try{
